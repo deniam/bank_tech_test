@@ -25,8 +25,15 @@ describe("BankAccount", () => {
     });
     
     it("client make a withdrawal of 500 and balance discreased on this value", () => {
-        bankAccount.makeWithdrawal(2000, '10/08/2023');
-        expect(bankAccount.checkBalance()).toBe(1000);
+        bankAccount.makeWithdrawal(500, '15/08/2023');
+        expect(bankAccount.checkBalance()).toBe(2500);
     })
 
+    it("date and amount of withdrawal recorded to the transactions", () => {
+        expect(bankAccount.checkTransactions()).toEqual([
+            {date: '05/08/2023', credit: 1000, debit: '', balance: 1000},
+            {date: '12/08/2023', credit: 2000, debit: '', balance: 3000},
+            {date: '15/08/2023', credit: '', debit: 500, balance: 2500}
+    ]);
+    });
 });

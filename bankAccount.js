@@ -14,7 +14,8 @@ class BankAccount {
     }
 
     makeWithdrawal(amount, date) {
-        this.balance-= amount;
+        this.balance -= amount;
+        this.transactions.push( {date: date, credit: '', debit: amount, balance: this.balance});
     }
     checkTransactions() {
         return this.transactions;
