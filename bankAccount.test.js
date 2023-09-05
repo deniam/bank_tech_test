@@ -25,7 +25,12 @@ describe("BankAccount", () => {
     });
     
     it("client make a withdrawal of 500 and balance discreased on this value", () => {
-        bankAccount.makeWithdrawal(500, '15/08/2023');
+        bankAccount.makeWithdraw(500, '15/08/2023');
+        expect(bankAccount.checkBalance()).toBe(2500);
+    })
+
+    it("client make a withdrawal of 5000 and get error message because of low balance", () => {
+        bankAccount.makeWithdraw(5000, '15/08/2023');
         expect(bankAccount.checkBalance()).toBe(2500);
     })
 
@@ -40,12 +45,12 @@ describe("BankAccount", () => {
 
 describe("Acceptance criteria", () => {
     const bankAccount = new BankAccount();
-    
+
     it("tests", () => {
         expect(bankAccount.checkBalance()).toBe(0);
         bankAccount.makeDeposit(1000, '05/08/2023');
         bankAccount.makeDeposit(2000, '12/08/2023');
-        bankAccount.makeWithdrawal(500, '15/08/2023');
+        bankAccount.makeWithdraw(500, '15/08/2023');
         expect(bankAccount.checkTransactions()).toEqual([
             {date: '05/08/2023', credit: '1000.00', debit: '', balance: 1000},
             {date: '12/08/2023', credit: '2000.00', debit: '', balance: 3000},

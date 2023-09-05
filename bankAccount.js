@@ -13,9 +13,13 @@ class BankAccount {
         this.transactions.push( {date: date, credit: amount.toFixed(2), debit: '', balance: this.balance});
     }
 
-    makeWithdrawal(amount, date) {
-        this.balance -= amount;
-        this.transactions.push( {date: date, credit: '', debit: amount.toFixed(2), balance: this.balance});
+    makeWithdraw(amount, date) {
+        if (amount <= this.balance) {
+            this.balance -= amount;
+            this.transactions.push( {date: date, credit: '', debit: amount.toFixed(2), balance: this.balance});
+        } else {
+            console.log("Not enough funds");
+        };
     }
     checkTransactions() {
         return this.transactions;
@@ -34,5 +38,5 @@ module.exports = BankAccount;
 const account = new BankAccount();
 account.makeDeposit(1000, '10/01/2023');
 account.makeDeposit(2000, '13/01/2023');
-account.makeWithdrawal(500, '14/01/2023');
+account.makeWithdraw(500, '14/01/2023');
 account.printStatement();
