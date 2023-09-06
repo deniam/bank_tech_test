@@ -91,4 +91,7 @@ You can run the app in the terminal by the command below:
 ```bash
 $ node bankAccount.js
 ```
-To run our tests type in terminal `jest`
+![Alt text](screenshot.png)
+You can run the tests by typing `jest` in terminal.
+
+![Alt text](tests.png)
