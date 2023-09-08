@@ -6,15 +6,15 @@ const Account = require('../src/account.js');
 
 describe("test statement", () => {
     const account = new Account(0, []);
-        const deposit1 = new Deposit(1000, '05/08/2023');
-        const deposit2 = new Deposit(2000, '12/08/2023');
-        const withdrawal = new Withdrawal(500, '15/08/2023');
-        const operation = new Operation(account);
-        const statement = new Statement();
+    const deposit1 = new Deposit(1000, '05/08/2023');
+    const deposit2 = new Deposit(2000, '12/08/2023');
+    const withdrawal = new Withdrawal(500, '15/08/2023');
+    const operation = new Operation(account);
+    const statement = new Statement();
 
-        operation.makeDeposit(deposit1);
-        operation.makeDeposit(deposit2);
-        operation.makeWithdrawal(withdrawal);
+    operation.makeDeposit(deposit1);
+    operation.makeDeposit(deposit2);
+    operation.makeWithdrawal(withdrawal);
         
     it("list of transactions is reversed", () => {
         const reversedTransactions = account.checkTransactions().reverse();

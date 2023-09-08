@@ -22,40 +22,51 @@ date || credit || debit || balance
 # Design recipe
 
 ### Planning
-
-Idea is to create a single class program with functions so it should be easy to use it and it can be a base for adding advanced functionality in the future.
-
-I tried to think as a user, what functionality do I need to have and then what steps do I need to do as a developer to implement it.
 ```
+The goal was to create a versatile program with a clear structure to accommodate future enhancements easily.
+
+I began by considering the actions users need to perform and how to implement them efficiently:
+
 verbs: make deposit, make withdrawal, print statement.
 
 nouns: date, amount, balance, transactions.
+
+
 ```
-### Client should: 
- - add funds;
- - withdraw funds;
- - print statement.
+### User Functionality
+The program should enable users to:
+* Add funds to their account (make deposits).
+* Withdraw funds from their account (make withdrawals).
+* View their transaction history (print statements).
 
-### When the client add funds or make a withdraw:
- - it reflects on the amount of balance;
- - it records to the transaction with amount, date and current balance.
+### Transaction Handling
+When users make deposits or withdrawals:
+* It updates their account balance.
+* Records the transaction with the amount, date, and current balance.
 
-### To test this functionality, we need additional functions:
- - function that return current balance;
- - fubction that return a list of transactions.
+### Essential Functions
+To test this functionality, we require additional functions:
+* A function to retrieve the current balance.
+* *A function to retrieve a list of transactions.
 
-* In addition, we need to check is there enough funds on the balance before withdraw and restrict it if the amount on the balance lower than amount of withdraw.
-```
-Class name: BankAccount
-    constructor:
-        - transactions
-        - balance
-    Functions: 
-        - checkBalance
-        - makeDeposit
-        - makeWithdraw
-        - checkTransactions
-        - printStatement.
+In addition, we need to implement checks to ensure that there are sufficient funds in the account before a withdrawal is allowed.
+
+### Modular Design:
+
+To adhere to the Single Responsibility Principle, I've isolated different aspects of functionality into separate classes:
+
+![Alt text](diagram.png)
+
+* Deposit and Withdrawal Classes: These allow users to set the amount and date for each transaction. They provide two methods: getAmount() and getDate(). This encapsulation simplifies the implementation of new transaction types and facilitates testing.
+
+* Operation Class: This class handles deposits and withdrawals, ensuring proper recording in the Account class.
+
+* Account Class: This class manages user account data, including balance and transaction history. It provides methods to check the current balance (checkBalance()) and retrieve transaction details (checkTransactions()).
+
+* Statement Class: Separated from the others, this class utilizes data from the Account class to print a statement of all transactions, ordered from newest to oldest.
+
+### Testing Strategy:
+Each class has its own test files. Deposit and Withdrawal classes have unit tests, while Operation, Account, and Statement classes work together in integration tests using mocks.
 ```
 ### Extra things that can be implemented:
 * credit limit option, so user can withdraw funds within the credit limit;
@@ -91,7 +102,7 @@ You can run the app in the terminal by the command below:
 ```bash
 $ node bankAccount.js
 ```
-![Alt text](screenshot.png)
+![Alt text](statement.png)
 You can run the tests by typing `jest` in terminal.
 
 ![Alt text](tests.png)
