@@ -1,5 +1,5 @@
 const Statement = require('../src/statement');
-const Operation = require('../src/operation');
+const Operation = require('../src/account');
 const Deposit = require('../src/deposit');
 const Withdrawal = require('../src/transaction');
 const Account = require('../src/account.js');
