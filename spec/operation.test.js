@@ -1,6 +1,6 @@
 const Operation = require('../src/operation');
 const Deposit = require('../src/deposit');
-const Withdrawal = require('../src/withdrawal');
+const Withdrawal = require('../src/transaction');
 const Account = require('../src/account.js');
 
 describe("Testing operations with bank account", () => {
