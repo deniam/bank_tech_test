@@ -3,24 +3,24 @@ class Operation {
         this.account = account;
     }
 
-    makeDeposit(deposit) {
-        const depositAmount = deposit.getAmount();
-        const depositDate = deposit.getDate();
+    makeTransaction(transaction) {
+        const transactionAmount = transaction.getAmount();
+        const transactionDate = transaction.getDate();
+        const transactionType = transaction.getType();
         let accountTransactions = this.account.transactions;
-        this.account.balance += depositAmount;
-        accountTransactions.push( {date: depositDate, credit: depositAmount, debit: '', balance: this.account.balance});
-    }
-
-    makeWithdrawal(withdrawal) {
-        const withdrawalAmount = withdrawal.getAmount();
-        const withdrawalDate = withdrawal.getDate();
-        let accountTransactions = this.account.transactions;
-        if (withdrawalAmount <= this.account.balance) {
-            this.account.balance -= withdrawalAmount;
-            accountTransactions.push( {date: withdrawalDate, credit: '', debit: withdrawalAmount, balance: this.account.balance});
+        if (transactionType === "deposit") {
+            this.account.balance += transactionAmount;
+        accountTransactions.push( {date: transactionDate, credit: transactionAmount, debit: '', balance: this.account.balance});
+        } else if (transactionType === "withdrawal") {
+            if (transactionAmount <= this.account.balance) {
+                this.account.balance -= transactionAmount;
+                accountTransactions.push( {date: transactionDate, credit: '', debit: transactionAmount, balance: this.account.balance});
+            } else {
+                console.log("Not enough funds");
+            };
         } else {
-            console.log("Not enough funds");
-        };
+            throw "Invalid type of transaction";
+        }
     }
 };
 
