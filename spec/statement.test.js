@@ -1,20 +1,17 @@
 const Statement = require('../src/statement');
-const Operation = require('../src/account');
-const Deposit = require('../src/deposit');
-const Withdrawal = require('../src/transaction');
+const Transaction = require('../src/transaction');
 const Account = require('../src/account.js');
 
 describe("test statement", () => {
-    const account = new Account(0, []);
-    const deposit1 = new Deposit(1000, '05/08/2023');
-    const deposit2 = new Deposit(2000, '12/08/2023');
-    const withdrawal = new Withdrawal(500, '15/08/2023');
-    const operation = new Operation(account);
+    const account = new Account();
+    const transaction1 = new Transaction(1000, '05/08/2023', 'deposit');
+    const transaction2 = new Transaction(2000, '12/08/2023', 'deposit');
+    const transaction3 = new Transaction(500, '15/08/2023', 'withdrawal');
     const statement = new Statement();
 
-    operation.makeDeposit(deposit1);
-    operation.makeDeposit(deposit2);
-    operation.makeWithdrawal(withdrawal);
+    account.makeTransaction(transaction1);
+    account.makeTransaction(transaction2);
+    account.makeTransaction(transaction3);
         
     it("list of transactions is reversed", () => {
         const reversedTransactions = account.checkTransactions().reverse();
@@ -30,9 +27,9 @@ describe("test statement", () => {
 
         expect(consoleSpy).toHaveBeenCalledTimes(4);
         expect(consoleSpy).toHaveBeenCalledWith("date || credit || debit || balance");
-        expect(consoleSpy).toHaveBeenCalledWith("15/08/2023 ||  || 500 || 2500.00");
-        expect(consoleSpy).toHaveBeenCalledWith("12/08/2023 || 2000 ||  || 3000.00");
-        expect(consoleSpy).toHaveBeenCalledWith("05/08/2023 || 1000 ||  || 1000.00");
+        expect(consoleSpy).toHaveBeenCalledWith("15/08/2023 ||  || 500.00 || 2500.00");
+        expect(consoleSpy).toHaveBeenCalledWith("12/08/2023 || 2000.00 ||  || 3000.00");
+        expect(consoleSpy).toHaveBeenCalledWith("05/08/2023 || 1000.00 ||  || 1000.00");
         
     });
 });
