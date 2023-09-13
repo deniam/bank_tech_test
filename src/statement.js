@@ -4,7 +4,9 @@ class Statement {
         const reversedTransactions = account.checkTransactions().reverse();
         console.log("date || credit || debit || balance");
         reversedTransactions.forEach(transaction => {
-        console.log(`${transaction.date} || ${transaction.credit} || ${transaction.debit} || ${transaction.balance.toFixed(2)}`)
+            let credit = transaction.credit != "" ? transaction.credit.toFixed(2) : transaction.credit;
+            let debit = transaction.debit != "" ? transaction.debit.toFixed(2) : transaction.debit;
+        console.log(`${transaction.date} || ${credit} || ${debit} || ${transaction.balance.toFixed(2)}`)
         });
     };
 };
