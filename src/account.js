@@ -27,7 +27,7 @@ class Account {
                 console.log("Not enough funds");
             };
         } else {
-            throw "Invalid type of transaction";
+            throw new Error("Invalid type of transaction");
         }
     }
 };

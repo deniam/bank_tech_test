@@ -57,11 +57,9 @@ To adhere to the Single Responsibility Principle, I've isolated different aspect
 
 ![Alt text](diagram.png)
 
-* Deposit and Withdrawal Classes: These allow users to set the amount and date for each transaction. They provide two methods: getAmount() and getDate(). This encapsulation simplifies the implementation of new transaction types and facilitates testing.
+* Transaction Class: These allow users to set the amount, date and type for each transaction. They provide two methods: getAmount(), getDate() and getType(). This encapsulation simplifies the implementation of new transaction types and facilitates testing.
 
-* Operation Class: This class handles deposits and withdrawals, ensuring proper recording in the Account class.
-
-* Account Class: This class manages user account data, including balance and transaction history. It provides methods to check the current balance (checkBalance()) and retrieve transaction details (checkTransactions()).
+* Account Class: This class manages user account data, including balance, transaction history, and handles deposits and withdrawals. It provides methods to check the current balance (checkBalance()), retrieve transaction details (checkTransactions()), and make deposit or withdrawal (makeTransaction(transaction)).
 
 * Statement Class: Separated from the others, this class utilizes data from the Account class to print a statement of all transactions, ordered from newest to oldest.
 

@@ -1,14 +1,14 @@
 const Account = require('../src/account');
 const Transaction = require('../src/transaction');
 
-describe("Testing operations woth bank account", () => {
+describe("Check that account has default balance and empty list of transactions", () => {
     const account = new Account();
 
     it("has default balance", () => {
         expect(account.checkBalance()).toBe(0);
     });
 
-    it("returns transactions", () => {
+    it("return transactions", () => {
         expect(account.checkTransactions()).toStrictEqual([]);
     });
 });
@@ -20,6 +20,14 @@ describe("Testing accounts with bank account", () => {
         const transaction = new Transaction(1000, '05/08/2023', 'deposit');
         account.makeTransaction(transaction);
         expect(account.checkBalance()).toEqual(1000);
+    });
+
+    it("client makes a transaction of 1000 with wrong type of transaction", () => {
+        const transaction = new Transaction(1000, '05/08/2023', 'foo');
+        makeTransaction = () => {
+            throw new Error("Invalid type of transaction");
+        };
+        expect(() => {account.makeTransaction(transaction)}).toThrow("Invalid type of transaction");
     });
 
     it("deposit with correct data has been recorded to transactions", () => {
@@ -60,6 +68,8 @@ describe("Testing accounts with bank account", () => {
             {date: '15/08/2023', credit: '', debit: 500, balance: 2500}
             ]);
     });
+
+
 });
 describe("Acceptance criteria", () => {
     const account = new Account();
