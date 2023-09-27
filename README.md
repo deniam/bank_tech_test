@@ -55,8 +55,6 @@ In addition, we need to implement checks to ensure that there are sufficient fun
 
 To adhere to the Single Responsibility Principle, I've isolated different aspects of functionality into separate classes:
 
-![Alt text](diagram.png)
-
 * Transaction Class: These allow users to set the amount, date and type for each transaction. They provide two methods: getAmount(), getDate() and getType(). This encapsulation simplifies the implementation of new transaction types and facilitates testing.
 
 * Account Class: This class manages user account data, including balance, transaction history, and handles deposits and withdrawals. It provides methods to check the current balance (checkBalance()), retrieve transaction details (checkTransactions()), and make deposit or withdrawal (makeTransaction(transaction)).
